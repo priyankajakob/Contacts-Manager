@@ -34,10 +34,11 @@ export const startGetUser = () => {
 
 // handle form submission
 export const startSetUser = (formData, props) => {
+    //console.log(formData)
     return (dispatch) => {
         axios.post('/users/login', formData)
             .then(response => {
-                // console.log(response.data)
+                console.log(response)
                 const { token, user } = response.data 
                 localStorage.setItem('token', token) 
                 dispatch(setUser(user))

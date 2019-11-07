@@ -1,4 +1,5 @@
 import React from 'react' 
+import axios from 'axios'
 
 class Register extends React.Component {
     constructor() {
@@ -23,7 +24,17 @@ class Register extends React.Component {
             email: this.state.email, 
             password: this.state.password
         }
-        console.log(formData)
+         // todo client side validation
+         axios.post('http://localhost:3010/users/register', formData)
+         .then(() => {
+             this.setState(() => ({
+                 username: '', email: '', password: '', notice: 'successfully registered, taking you to login screen'
+             }))
+             setTimeout(() => {
+                 this.props.history.push('/users/login')
+             }, 2000)
+         })
+         .catch(err => console.log(err))
     }
 
     render() {
